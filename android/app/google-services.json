@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "76397572307",
+    "project_id": "csc4360-activity16-fbauth",
+    "storage_bucket": "csc4360-activity16-fbauth.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:76397572307:android:5752cb0e8272e71d1ee426",
+        "android_client_info": {
+          "package_name": "com.example.firebaseauth"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCXvaARqrp8pJdbNwuDSYVGMnnyZxHSkxw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
