@@ -94,77 +94,69 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Log In')),
-      body: Center(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.all(64.0),
-          child: Form(
-            key: _formKey,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              mainAxisSize: MainAxisSize.min,
-              spacing: 24.0,
-              children: [
-                // Username field
-                TextFormField(
-                  controller: _usernameController,
-                  decoration: InputDecoration(
-                    labelText: 'Username',
-                    prefixIcon: const Icon(Icons.person),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                  ),
-                ),
-
-                // Password field
-                TextFormField(
-                  controller: _passwordController,
-                  obscureText: !_isPasswordVisible,
-                  decoration: InputDecoration(
-                    labelText: 'Password',
-                    prefixIcon: const Icon(Icons.lock),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    suffixIcon: IconButton(
-                      icon: Icon(
-                        _isPasswordVisible
-                            ? Icons.visibility
-                            : Icons.visibility_off,
-                      ),
-                      onPressed: () {
-                        setState(() {
-                          _isPasswordVisible = !_isPasswordVisible;
-                        });
-                      },
-                    ),
-                  ),
-                ),
-
-                // Submit button
-                ElevatedButton(
-                  onPressed: _submitForm,
-                  child: const Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [Text('Login')],
-                  ),
-                ),
-
-                // Switch to login screen button
-                SizedBox(height: 20),
-                ElevatedButton(
-                  onPressed: _createScreen,
-                  child: const Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [Text('Go to create a new account')],
-                  ),
-                ),
-              ],
+    return Form(
+      key: _formKey,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
+        spacing: 24.0,
+        children: [
+          // Username field
+          TextFormField(
+            controller: _usernameController,
+            decoration: InputDecoration(
+              labelText: 'Username',
+              prefixIcon: const Icon(Icons.person),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
             ),
           ),
-        ),
+
+          // Password field
+          TextFormField(
+            controller: _passwordController,
+            obscureText: !_isPasswordVisible,
+            decoration: InputDecoration(
+              labelText: 'Password',
+              prefixIcon: const Icon(Icons.lock),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
+              suffixIcon: IconButton(
+                icon: Icon(
+                  _isPasswordVisible ? Icons.visibility : Icons.visibility_off,
+                ),
+                onPressed: () {
+                  setState(() {
+                    _isPasswordVisible = !_isPasswordVisible;
+                  });
+                },
+              ),
+            ),
+          ),
+
+          // Submit button
+          ElevatedButton(
+            onPressed: _submitForm,
+            child: const Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [Text('Login')],
+            ),
+          ),
+
+          /*
+          // Switch to login screen button
+          SizedBox(height: 20),
+          ElevatedButton(
+            onPressed: _createScreen,
+            child: const Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [Text('Go to create a new account')],
+            ),
+          ),
+          */
+        ],
       ),
     );
     ;

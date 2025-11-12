@@ -1,4 +1,5 @@
 import 'package:firebaseauth/authservice.dart';
+import 'package:firebaseauth/screens/create_account_screen.dart';
 import 'package:firebaseauth/screens/login_screen.dart';
 import 'package:firebaseauth/screens/profile_screen.dart';
 import 'package:flutter/material.dart';
@@ -95,7 +96,22 @@ class _MyHomePageState extends State<MyHomePage> {
           }
 
           if (!snapshot.hasData) {
-            return LoginScreen();
+            return Scaffold(
+              //appBar: AppBar(title: const Text('Log In')),
+              body: Center(
+                child: SingleChildScrollView(
+                  padding: const EdgeInsets.all(64.0),
+                  child: Column(
+                    children: [
+                      AppBar(title: const Text('Log In')),
+                      LoginScreen(),
+                      AppBar(title: const Text('Create Account')),
+                      CreateAccountScreen(),
+                    ],
+                  ),
+                ),
+              ),
+            );
           }
 
           final user = snapshot.data!;
