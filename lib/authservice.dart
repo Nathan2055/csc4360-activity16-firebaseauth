@@ -7,13 +7,12 @@ import 'package:firebaseauth/firebase_options.dart';
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  Future<void> createAccount(String emailAddress, String password) async {
+  void createAccount(String emailAddress, String password) {
     try {
-      final credential = await FirebaseAuth.instance
-          .createUserWithEmailAndPassword(
-            email: emailAddress,
-            password: password,
-          );
+      _auth.createUserWithEmailAndPassword(
+        email: emailAddress,
+        password: password,
+      );
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         print('The password provided is too weak.');
@@ -25,12 +24,9 @@ class AuthService {
     }
   }
 
-  Future<void> login(String emailAddress, String password) async {
+  void login(String emailAddress, String password) {
     try {
-      final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: emailAddress,
-        password: password,
-      );
+      _auth.signInWithEmailAndPassword(email: emailAddress, password: password);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         print('No user found for that email.');
@@ -40,18 +36,18 @@ class AuthService {
     }
   }
 
-  Future<void> logout() async {
+  void logout() {
     try {
-      await FirebaseAuth.instance.signOut();
+      _auth.signOut();
     } on FirebaseAuthException catch (e) {
       print(e);
     }
   }
 
   bool isLoggedIn() {
-    if (FirebaseAuth.instance.currentUser != null) {
+    if (_auth.currentUser != null) {
       print('current user:');
-      print(FirebaseAuth.instance.currentUser?.uid);
+      print(_auth.currentUser?.uid);
       return true;
     } else {
       print('not signed in');
