@@ -10,13 +10,11 @@ class AuthService {
   Future<void> createAccount(String emailAddress, String password) async {
     print('creating account');
     try {
-      var state = await _auth.createUserWithEmailAndPassword(
+      await _auth.createUserWithEmailAndPassword(
         email: emailAddress,
         password: password,
       );
-      print(state.toString);
-      print('created account');
-      login(emailAddress, password);
+      await login(emailAddress, password);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         print('The password provided is too weak.');
@@ -28,10 +26,13 @@ class AuthService {
     }
   }
 
-  void login(String emailAddress, String password) {
+  Future<void> login(String emailAddress, String password) async {
     print('logging in');
     try {
-      _auth.signInWithEmailAndPassword(email: emailAddress, password: password);
+      await _auth.signInWithEmailAndPassword(
+        email: emailAddress,
+        password: password,
+      );
       print('logged in');
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
