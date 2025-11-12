@@ -54,9 +54,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
     Navigator.pushReplacement(
       context,
       //MaterialPageRoute(builder: (context) => InventoryHomePage()),
-      MaterialPageRoute(
-        builder: (context) => MyHomePage(title: 'Firebase Auth Demo'),
-      ),
+      MaterialPageRoute(builder: (context) => MyHomePage()),
     );
   }
 

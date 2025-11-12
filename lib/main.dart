@@ -1,9 +1,12 @@
+import 'package:firebaseauth/authservice.dart';
 import 'package:firebaseauth/screens/login_screen.dart';
+import 'package:firebaseauth/screens/profile_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebaseauth/firebase_options.dart';
+import 'dart:async';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -15,19 +18,48 @@ void main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(title: 'Firebase Auth Demo', home: LoginScreen());
+    //return MaterialApp(title: 'Firebase Auth Demo', home: LoginScreen());
+    return MaterialApp(title: 'Firebase Auth Demo', home: MyHomePage());
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key? key, required this.title}) : super(key: key);
-  final String title;
+  MyHomePage({Key? key}) : super(key: key);
+  final String title = 'Firebase Auth Demo';
+  final Duration delay = const Duration(seconds: 1);
+  final AuthService authService = AuthService();
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  late final StreamController<int> _controller = StreamController<int>(
+    onListen: () async {
+      await Future<void>.delayed(widget.delay);
+
+      if (!_controller.isClosed) {
+        _controller.add(1);
+      }
+
+      await Future<void>.delayed(widget.delay);
+
+      if (!_controller.isClosed) {
+        _controller.close();
+      }
+    },
+  );
+
+  Stream<int> get _bids => _controller.stream;
+
+  @override
+  void dispose() {
+    if (!_controller.isClosed) {
+      _controller.close();
+    }
+    super.dispose();
+  }
+
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   void _signOut() async {
@@ -51,6 +83,26 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ],
       ),
+      body: StreamBuilder<User?>(
+        stream: widget.authService.getStream(),
+        builder: (BuildContext context, AsyncSnapshot<User?> snapshot) {
+          if (snapshot.hasError) {
+            return const Text('Something went wrong');
+          }
+
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Text("Loading...");
+          }
+
+          if (!snapshot.hasData) {
+            return LoginScreen();
+          }
+
+          final user = snapshot.data!;
+          return ProfileScreen(emailAddress: widget.authService.getEmail());
+        },
+      ),
+      /*
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -60,6 +112,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
+      */
     );
   }
 }

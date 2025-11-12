@@ -45,10 +45,10 @@ class AuthService {
     }
   }
 
-  void logout() {
+  Future<void> logout() async {
     print('signing out');
     try {
-      _auth.signOut();
+      await _auth.signOut();
       print('signed out');
     } on FirebaseAuthException catch (e) {
       print(e);
@@ -64,5 +64,32 @@ class AuthService {
       print('not signed in');
       return false;
     }
+  }
+
+  Stream<User?>? getStream() {
+    return _auth.authStateChanges();
+  }
+
+  String getEmail() {
+    if (_auth.currentUser != null) {
+      for (final providerProfile in _auth.currentUser!.providerData) {
+        /*
+        // ID of the provider (google.com, apple.com, etc.)
+        final provider = providerProfile.providerId;
+
+        // UID specific to the provider
+        final uid = providerProfile.uid;
+
+        // Name, email address, and profile photo URL
+        final name = providerProfile.displayName;
+        final emailAddress = providerProfile.email;
+        final profilePhoto = providerProfile.photoURL;
+        */
+
+        final emailAddress = providerProfile.email!;
+        return emailAddress;
+      }
+    }
+    return '';
   }
 }
