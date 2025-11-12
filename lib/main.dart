@@ -76,12 +76,14 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
         actions: <Widget>[
+          /*
           ElevatedButton(
             onPressed: () {
               _signOut();
             },
             child: Text('Sign Out'),
           ),
+          */
         ],
       ),
       body: StreamBuilder<User?>(
