@@ -30,15 +30,16 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
   // Track password visibility for the "show password" toggle
   bool _isPasswordVisible = false;
 
-  void _submitForm() {
+  void _submitForm() async {
     String emailAddress = _usernameController.text;
     String password = _passwordController.text;
 
-    widget.authService.createAccount(emailAddress, password);
+    await widget.authService.createAccount(emailAddress, password);
 
     print('are we logged in?');
     print(widget.authService.isLoggedIn());
 
+    /*
     while (true) {
       if (widget.authService.isLoggedIn()) {
         _nextScreen();
@@ -46,6 +47,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
         //sleep(Duration(seconds: 1)); // wait 1 second
       }
     }
+    */
   }
 
   void _nextScreen() {
