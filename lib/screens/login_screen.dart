@@ -1,8 +1,5 @@
 import 'package:firebaseauth/authservice.dart';
 import 'package:flutter/material.dart';
-import 'package:firebaseauth/main.dart';
-import 'package:firebaseauth/screens/create_account_screen.dart';
-import 'dart:io';
 
 class LoginScreen extends StatefulWidget {
   LoginScreen({super.key});
@@ -38,58 +35,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
     print('are we logged in?');
     print(widget.authService.isLoggedIn());
-
-    /*
-    while (true) {
-      if (widget.authService.isLoggedIn()) {
-        _nextScreen();
-      } else {
-        //await Future.delayed(const Duration(seconds: 1)); // wait 1 second
-        sleep(Duration(seconds: 1)); // wait 1 second
-      }
-    }
-    */
-
-    /*
-    if (_usernameController.text == adminUsername &&
-        _passwordController.text == adminPassword) {
-      // Login as admin
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => InventoryHomePage()),
-      );
-    } else if (_usernameController.text == viewerUsername &&
-        _passwordController.text == viewerPassword) {
-      // Login as viewer
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (context) => InventoryHomePage(readOnly: true),
-        ),
-      );
-    } else {
-      // Show error for incorrect credentials
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Incorrect username and/or password')),
-      );
-    }
-    */
-  }
-
-  void _nextScreen() {
-    Navigator.pushReplacement(
-      context,
-      //MaterialPageRoute(builder: (context) => InventoryHomePage()),
-      MaterialPageRoute(builder: (context) => MyHomePage()),
-    );
-  }
-
-  void _createScreen() {
-    Navigator.pushReplacement(
-      context,
-      //MaterialPageRoute(builder: (context) => InventoryHomePage()),
-      MaterialPageRoute(builder: (context) => CreateAccountScreen()),
-    );
   }
 
   @override
@@ -144,21 +89,8 @@ class _LoginScreenState extends State<LoginScreen> {
               children: [Text('Login')],
             ),
           ),
-
-          /*
-          // Switch to login screen button
-          SizedBox(height: 20),
-          ElevatedButton(
-            onPressed: _createScreen,
-            child: const Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [Text('Go to create a new account')],
-            ),
-          ),
-          */
         ],
       ),
     );
-    ;
   }
 }

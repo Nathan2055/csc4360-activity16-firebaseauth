@@ -1,8 +1,5 @@
 import 'package:firebaseauth/authservice.dart';
 import 'package:flutter/material.dart';
-import 'package:firebaseauth/main.dart';
-import 'package:firebaseauth/screens/login_screen.dart';
-import 'dart:io';
 
 class ProfileScreen extends StatefulWidget {
   ProfileScreen({super.key, required this.emailAddress});
@@ -21,16 +18,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
     print('are we logged in?');
     print(widget.authService.isLoggedIn());
-
-    /*
-    while (true) {
-      if (widget.authService.isLoggedIn()) {
-        _nextScreen();
-      } else {
-        //sleep(Duration(seconds: 1)); // wait 1 second
-      }
-    }
-    */
   }
 
   @override
@@ -56,6 +43,5 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ),
       ),
     );
-    ;
   }
 }

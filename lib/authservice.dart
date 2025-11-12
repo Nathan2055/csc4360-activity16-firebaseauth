@@ -1,8 +1,4 @@
-import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebaseauth/firebase_options.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -73,19 +69,6 @@ class AuthService {
   String getEmail() {
     if (_auth.currentUser != null) {
       for (final providerProfile in _auth.currentUser!.providerData) {
-        /*
-        // ID of the provider (google.com, apple.com, etc.)
-        final provider = providerProfile.providerId;
-
-        // UID specific to the provider
-        final uid = providerProfile.uid;
-
-        // Name, email address, and profile photo URL
-        final name = providerProfile.displayName;
-        final emailAddress = providerProfile.email;
-        final profilePhoto = providerProfile.photoURL;
-        */
-
         final emailAddress = providerProfile.email!;
         return emailAddress;
       }

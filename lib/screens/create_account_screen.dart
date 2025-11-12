@@ -1,8 +1,5 @@
 import 'package:firebaseauth/authservice.dart';
 import 'package:flutter/material.dart';
-import 'package:firebaseauth/main.dart';
-import 'package:firebaseauth/screens/login_screen.dart';
-import 'dart:io';
 
 class CreateAccountScreen extends StatefulWidget {
   CreateAccountScreen({super.key});
@@ -38,31 +35,6 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
 
     print('are we logged in?');
     print(widget.authService.isLoggedIn());
-
-    /*
-    while (true) {
-      if (widget.authService.isLoggedIn()) {
-        _nextScreen();
-      } else {
-        //sleep(Duration(seconds: 1)); // wait 1 second
-      }
-    }
-    */
-  }
-
-  void _nextScreen() {
-    Navigator.pushReplacement(
-      context,
-      //MaterialPageRoute(builder: (context) => InventoryHomePage()),
-      MaterialPageRoute(builder: (context) => MyHomePage()),
-    );
-  }
-
-  void _loginScreen() {
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (context) => LoginScreen()),
-    );
   }
 
   @override
@@ -117,21 +89,8 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
               children: [Text('Create Account')],
             ),
           ),
-
-          /*
-          // Switch to login screen button
-          SizedBox(height: 20),
-          ElevatedButton(
-            onPressed: _loginScreen,
-            child: const Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [Text('Go to log into an existing account')],
-            ),
-          ),
-          */
         ],
       ),
     );
-    ;
   }
 }
