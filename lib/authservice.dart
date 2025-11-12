@@ -7,12 +7,16 @@ import 'package:firebaseauth/firebase_options.dart';
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  void createAccount(String emailAddress, String password) {
+  void createAccount(String emailAddress, String password) async {
+    print('creating account');
     try {
-      _auth.createUserWithEmailAndPassword(
+      var state = await _auth.createUserWithEmailAndPassword(
         email: emailAddress,
         password: password,
       );
+      print(state.toString);
+      print('created account');
+      login(emailAddress, password);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         print('The password provided is too weak.');
@@ -25,20 +29,26 @@ class AuthService {
   }
 
   void login(String emailAddress, String password) {
+    print('logging in');
     try {
       _auth.signInWithEmailAndPassword(email: emailAddress, password: password);
+      print('logged in');
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         print('No user found for that email.');
       } else if (e.code == 'wrong-password') {
         print('Wrong password provided for that user.');
       }
+    } catch (e) {
+      print(e);
     }
   }
 
   void logout() {
+    print('signing out');
     try {
       _auth.signOut();
+      print('signed out');
     } on FirebaseAuthException catch (e) {
       print(e);
     }

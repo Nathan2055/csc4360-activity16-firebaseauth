@@ -2,6 +2,7 @@ import 'package:firebaseauth/authservice.dart';
 import 'package:flutter/material.dart';
 import 'package:firebaseauth/main.dart';
 import 'package:firebaseauth/screens/create_account_screen.dart';
+import 'dart:io';
 
 class LoginScreen extends StatefulWidget {
   LoginScreen({super.key});
@@ -29,17 +30,18 @@ class _LoginScreenState extends State<LoginScreen> {
   // Track password visibility for the "show password" toggle
   bool _isPasswordVisible = false;
 
-  Future<void> _submitForm() async {
+  void _submitForm() {
     String emailAddress = _usernameController.text;
     String password = _passwordController.text;
 
-    await widget.authService.login(emailAddress, password);
+    widget.authService.login(emailAddress, password);
 
     while (true) {
       if (widget.authService.isLoggedIn()) {
         _nextScreen();
       } else {
-        await Future.delayed(const Duration(seconds: 1)); // wait 1 second
+        //await Future.delayed(const Duration(seconds: 1)); // wait 1 second
+        sleep(Duration(seconds: 1)); // wait 1 second
       }
     }
 
